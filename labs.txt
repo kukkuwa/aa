@@ -1,126 +1,514 @@
-*******************Change Host Name*********************
-Switch>en
-Switch#config t
-Switch(config)#hostname S2
+*********to enter an  array ************
+
+import java.util.Scanner;
+public class DisplayArray {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+	System.out.print("Enter the size of the array: ");
+        int size = scanner.nextInt();
+
+        int[] array = new int[size];
+
+        System.out.println("Enter the elements of the array:");
+
+        for (int i = 0; i < size; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        System.out.println("Entered array elements:");
+
+        for (int element : array) {
+            System.out.println(element);
+        }
+
+        scanner.close();
+    }
+}
+
+***********insert to array*********
+public class DisplayArray {
+    public static void main(String[] args) {
+        int[] array = {10, 25, 5, 85, 60};
+        int valueToInsert = 67;
+        int insertionIndex = 2;
+	// Create a new array 
+        int[] newArray = new int[array.length + 1];
+
+        // Copy elements
+        for (int i = 0; i < insertionIndex; i++) {
+            newArray[i] = array[i];
+        }
+
+        // Insert the value
+        newArray[insertionIndex] = valueToInsert;
+
+        for (int i = insertionIndex + 1; i < newArray.length; i++) {
+            newArray[i] = array[i - 1];
+        }
+	// Display
+        System.out.println("Original array elements:");
+        for (int element : array) {
+            System.out.print(element + " ");
+        }
+
+        System.out.println("\nNew array elements after insertion:");
+        for (int element : newArray) {
+            System.out.print(element + " ");
+        }
+    }
+}
+****************DELETE FROM ARRAY***********
+public class Array{
+    public static void main(String[] args) {
+        int[] array = {10, 30, 50, 70, 90};
+        int indexToRemove = 2;
+        int[] newArray = new int[array.length - 1];
+
+        for (int i = 0, j = 0; i < array.length; i++) {
+            if (i != indexToRemove) {
+                newArray[j] = array[i];
+                j++;
+            }
+        }
+        array = newArray;
+        System.out.println("Updated array elements after removal:");
+        for (int element : array) {
+            System.out.print(element + " ");
+        }
+    }
+}
+
+
+*********** find index of the array/delete/display*********
+public class StudentDatabase {
+    public static void main(String[] args) {
+        int[] studentNumbers = {78, 89, 90, 12, 65};
+
+        int searchStudentNumber = 90;
+        int searchIndex = -1;
+
+        for (int i = 0; i < studentNumbers.length; i++) {
+            if (studentNumbers[i] == searchStudentNumber) {
+                searchIndex = i;
+                break;
+            }
+        }
+
+        if (searchIndex != -1) {
+            System.out.println("Student number " + searchStudentNumber + " found at index " + searchIndex);
+        } else {
+            System.out.println("Student number " + searchStudentNumber + " not found.");
+        }
+
+        int newStudentNumber = 45;
+        int insertPosition = 3;
+
+        int[] newStudentNumbers = new int[studentNumbers.length + 1];
+
+        for (int i = 0, j = 0; i < newStudentNumbers.length; i++) {
+            if (i == insertPosition) {
+                newStudentNumbers[i] = newStudentNumber;
+            } else {
+                newStudentNumbers[i] = studentNumbers[j];
+                j++;
+            }
+        }
+
+        studentNumbers = newStudentNumbers;
+
+        //Delete
+        int deleteStudentNumber = 89;
+        int deleteIndex = -1;
+
+        for (int i = 0; i < studentNumbers.length; i++) {
+            if (studentNumbers[i] == deleteStudentNumber) {
+                deleteIndex = i;
+                break;
+            }
+        }
+
+        if (deleteIndex != -1) {
+            int[] updatedStudentNumbers = new int[studentNumbers.length - 1];
+
+            for (int i = 0, j = 0; i < studentNumbers.length; i++) {
+                if (i != deleteIndex) {
+                    updatedStudentNumbers[j] = studentNumbers[i];
+                    j++;
+                }
+            }
+
+            studentNumbers = updatedStudentNumbers;
+        }
+        System.out.println("Current student numbers in the array:");
+        for (int studentNumber : studentNumbers) {
+            System.out.print(studentNumber + " ");
+        }
+    }
+}
+********* ALL QUEUE METHODS********
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class QueueExample {
+    public static void main(String[] args) {
+        // Creating a queue
+        Queue<Integer> queue = new LinkedList<>();
+
+        // Adding elements to the queue using offer
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+
+        System.out.println("Queue: " + queue);
+
+        // Peek at the front element
+        if (!queue.isEmpty()) {
+            int frontElement = queue.peek();
+            System.out.println("Front element: " + frontElement);
+        } else {
+            System.out.println("Queue is empty.");
+        }
+
+        // Remove elements from the front of the queue using poll
+        if (!queue.isEmpty()) {
+            int removedElement = queue.poll();
+            System.out.println("Removed element: " + removedElement);
+        } else {
+            System.out.println("Queue is empty.");
+        }
+
+        System.out.println("Queue after poll: " + queue);
+
+        // Poll and peek after polling
+        if (!queue.isEmpty()) {
+            int removedElement = queue.poll();
+            System.out.println("Removed element: " + removedElement);
+        } else {
+            System.out.println("Queue is empty.");
+        }
+
+        // Offer more elements to the queue
+        queue.offer(40);
+        queue.offer(50);
+
+        System.out.println("Queue after offering more elements: " + queue);
+        
+        // Size of the queue
+        int queueSize = queue.size();
+        System.out.println("Queue size: " + queueSize);
+
+        // Check if the queue contains a specific element
+        boolean containsElement = queue.contains(30);
+        System.out.println("Queue contains element 30: " + containsElement);
+
+        // Clear the queue
+        queue.clear();
+        System.out.println("Queue after clearing: " + queue);
+    }
+}
+
+
+************* 	QUEUE ADD DELETE *********
+package queue;
+
+public class QueueTest {
+    private int maxSize;
+    private int[] queueArray;
+    private int rear;
+    private int front;
+    public QueueTest(int mxSize) {
+        this.rear = -1;
+        this.front = 0;
+        this.maxSize = mxSize;
+        this.queueArray = new int[mxSize];
+
+    }
+
+    public void enQueue(int value) {
+        if (rear == -1) {
+            rear = (rear + 1) % maxSize;
+            queueArray[rear] = value;
+            System.out.println("The Element is Added");
+        } else if ((rear + 1) % maxSize == front) {
+            System.out.println("The Queue is full");
+            return;
+        } else {
+            rear = (rear + 1) % maxSize;
+            queueArray[rear] = value;
+            System.out.println("The Element is Added");
+        }
+
+    }
+
+    public void deQueue() {
+        if (rear == -1) {
+            System.out.println("The Queue is Empty");
+            return;
+        }
+
+        int removeEle = queueArray[front];
+        front = (front + 1) % maxSize;
+        System.out.println("The element " + removeEle + " is Deleted");
+
+    }
+
+    public void Search(int value) {
+        if (rear == -1) {
+            System.out.println("The Queue is Empty");
+            return;
+        }
+
+        while (front != rear + 1) {
+            if (queueArray[front] == value) {
+                System.out.println("The element is found");
+                return;
+            }
+            front = (front + 1) % maxSize;
+            if (front == rear + 1) {
+                System.out.println("the Element is not found");
+            }
+
+        }
+
+    }
+
+    public void display() {
+        while (front != rear + 1) {
+            System.out.println(queueArray[front]);
+            front = (front + 1) % maxSize;
+        }
+    }
+
+    public static void main(String[] args) {
+        QueueTest qt = new QueueTest(5);
+
+        qt.enQueue(12);
+        qt.enQueue(7);
+        qt.enQueue(5);
+
+        qt.deQueue();
+
+        qt.display();
+    }
+}
+
+
+************* 	STACK POP PUSH PEEK DELETE *********
+import java.util.Stack;
+
+public class StackTest {
+    public static void main(String[] args) {
+        // Creating 
+        Stack<Integer> stack = new Stack<>();
+
+        // Push elements onto the stack
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        System.out.println("Stack: " + stack);
+
+        // Peek at the top element
+        if (!stack.isEmpty()) {
+            int topElement = stack.peek();
+            System.out.println("Top element: " + topElement);
+        } else {
+            System.out.println("Stack is empty.");
+        }
+
+        // Pop elements from the stack
+        if (!stack.isEmpty()) {
+            int poppedElement = stack.pop();
+            System.out.println("Popped element: " + poppedElement);
+        } else {
+            System.out.println("Stack is empty.");
+        }
+
+        System.out.println("Stack after pop: " + stack);
+
+        // Pop and peek after popping
+        if (!stack.isEmpty()) {
+            int poppedElement = stack.pop();
+            System.out.println("Popped element: " + poppedElement);
+        } else {
+            System.out.println("Stack is empty.");
+        }
+
+        // Peek again after popping
+        if (!stack.isEmpty()) {
+            int topElement = stack.peek();
+            System.out.println("Top element: " + topElement);
+        } else {
+            System.out.println("Stack is empty.");
+        }
+    }
+}
+
+********** USER INPUT STACK************
+import java.util.Scanner;
+public class user_Stack {
+int[]stack;
+int top;
+    user_Stack(int size)
+    { 
+        stack=new int[size];
+        top=-1;
+    }
+    public void push(int data){
+        if(isFull()){
+            System.out.println("Stack is full....");
+        }
+        else{
+            stack[++top] = data;
+            //System.out.println(data + " added to the stack");
+        }}
+    public boolean isFull(){
+        return top == 4;         
+                                 
+    }D
+    public boolean isEmpty()
+    {
+       return top == -1;
+    }public void pop()
+    {
+        if(top == -1)
+        {
+            System.out.println("Stack is empty");
+        }
+        else
+        {
+           stack[top] =0;
+           top--;      //--top is the same as --top
+        }
+    }
+    public void peek()
+    {
+           if(isEmpty())
+           {
+            System.out.println("The Stack is empty");
+           }
+           else{
+            System.out.print(" This peek method shows the element that was entered last ");
+            System.out.println(stack[top]);
+           }
+    }
+    public void display()
+    {
+        for(int i=0;i<stack.length;i++)
+        {
+           System.out.print(" " + stack[i]);
+        }
+        System.out.print("    ");
+    }
+    public static void main(String [] args)
+    {
+        Scanner sc = new Scanner(System.in);
+         System.out.println("Enter the size of the stack");
+         int size =sc.nextInt();
+         user_Stack st =new user_Stack(size);
+         System.out.println("1. push");
+         System.out.println("2. pop");
+         System.out.println("3. peek");
+         System.out.println("4. display");
+          int op =sc.nextInt();
+         int i=0;
+          if(op == 1)
+         {
+           System.out.println("Enter the number that you want in the stack");
+           int a =sc.nextInt();
+           st.push(a);
+         } 
+         else if(op == 2)
+         {
+           System.out.println("Enter the number that you want to delete from the stack");
+           int b =sc.nextInt();
+
+           st.pop();
+        } 
+         else if(op == 3)
+         {
+           System.out.println("See the element that was inserted into the stack last");
+           int c =sc.nextInt();
+
+           st.peek();
+
+        }else if(op == 4)
+         {
+           System.out.println("display the numbers.......");
+           int b =sc.nextInt();
+
+           st.display();
+         } 
+    
+    }
+}
+
+************ SORTING ALGO EVERYTHING*********
+import java.util.Arrays;
+
+public class Sort {
+    
+    // Bubble Sort
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+    // Selection 
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+    // Insertion
+    public static void insertionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original Array: " + Arrays.toString(arr));
+        
+        int[] bubbleSorted = arr.clone();
+        bubbleSort(bubbleSorted);
+        System.out.println("Bubble Sort: " + Arrays.toString(bubbleSorted));
+        
+        int[] selectionSorted = arr.clone();
+        selectionSort(selectionSorted);
+        System.out.println("Selection Sort: " + Arrays.toString(selectionSorted));
+        
+        int[] insertionSorted = arr.clone();
+        insertionSort(insertionSorted);
+        System.out.println("Insertion Sort: " + Arrays.toString(insertionSorted));
+    }
+}
 
 
 
-***************Use the cisco password for console line and virtual interface lines*****
-S2(config)#line console 0
-S2(config-line)#password cisco
-S2(config-line)#login
 
-S2(config)#line vty ?
-<0-15>  First Line number
-S2(config)#line vty 0 15
-S2(config-line)#password cisco
-S2(config-line)#login
-S2(config-line)#exit
-
-
-
-*********************Use cisco for the secret password*********************************
-S2(config-line)#enable secret cisco
-
-
-
-
-******************************Encrypt all clear text passwords.**************************
-S2(config)#service password-encryption
-
-
-
-
-
-****************Configure (MODT) banner****************************
-S2(config)#banner motd @Authorized Person Only!@
-
-
-
-
-*******************save configaration**************************
-S1#copy running-config startup-config 
-S1#write
-
-
-
-
-******************Configure addressing for all devices according to the Addressing Table.
-S2#config t
-S2(config)#interface VLAN 1 
-S2(config-if)#ip address 192.168.1.8 255.255.255.0
-
-____________________________________________________________________________________________________________________________________________________________________________________________
-
-
-
-*********************Create VLANs as follows and assign interfaces*******************
-S1(config)#vlan 10
-S1(config-vlan)#name VLAN10
-S1(config-vlan)#int range f0/1-2
-S1(config-if-range)#switchport mode access 
-S1(config-if-range)#switchport access vlan 10
-
-
-
-
-
-************************Configure IP address according to Addressing Table on each router.
-R1(config)#int g0/0/0
-R1(config-if)#ip address 192.168.1.129 255.255.255.224
-
-R1(config-if)#int g0/0/1.10
-R1(config-subif)#encapsulation dot1Q 10
-R1(config-subif)#ip address 192.168.1.1 255.255.255.224
-R1(config-subif)#no shutdown 
-
-
-
-
-
-***********************Configure a static route on each router.****************************
-R1(config)#ip route 192.168.1.128 255.255.255.224 192.168.1.130
-
-
-
-
-
-
-*******************Configure trunk on G0/1 on each switch******************
-S1(config)#int g0/1
-S1(config-if)#switchport mode tr
-
-
-
-
-
-
-**********************Disable DNS lookup**********************
-R1(config)#no ip domain-lookup
-
-
-
-
-*********************Set domain name as ccna.com on both routers***************************
-R1(config)#ip domain-name ccna.com
-
-
-
-
-
-************************Create username and password on both routers for SSH***************
-R1(config)#username ccna password ccna
-
- 
-
-***************************Generate 1024-bit RSA keys****************************
-R1(config)#crypto key generate rsa
-
-
-
-
-
-********************Configure all VTY lines for SSH access and use the local user profile for authentication.*************************
-R1(config)#line vty 0 4
-R1(config-line)#transport input ssh
-R1(config-line)#login local
